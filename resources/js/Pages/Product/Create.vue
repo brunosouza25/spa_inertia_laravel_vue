@@ -47,11 +47,13 @@ const store = () => {
                         <div class="p-6 space-y-6">
                             <div class="grid grid-cols-6 gap-6">
                                 <div class="col-span-6 sm:col-span-6">
-                                    <label for="name" class="block mb-2 text-sm font-medium text-gray-900">Product name</label>
-                                    <input type="text" name="name" v-model="form.name" id="name" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5">
-                                    <!-- <label for="name" class="block mb-2 text-sm font-medium text-red-700">Product name</label>
-                                    <input type="text" name="name" id v-model=form.="namename" class="shadow-sm bg-red-50 border border-red-500 text-red-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5">
-                                    <div class="font-sm text-red-500 mt-2">Product name field is required</div> -->
+                                    <label for="name"
+                                           class="block mb-2 text-sm font-medium"
+                                           :class="{'text-grey-900': !form.errors.name, 'text-red-700': form .errors.name}" >Product name</label>
+                                    <input type="text" name="name" v-model="form.name" id="name" class="shadow-sm  text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5"
+                                           :class="{'bg-red-50 border-red-500 border-red-900': form.errors.name, 'bg-grat-50 border-gray-300 border-gray-900': !form.errors.name}"
+                                    >
+                                   <div class="font-sm text-red-500 mt-2" v-if="form.errors.name">{{ form.errors.name }}</div>
                                 </div>
                                 <div class="col-span-6 sm:col-span-3">
                                     <label for="brand" class="block mb-2 text-sm font-medium text-gray-900 ">Brand</label>
