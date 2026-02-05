@@ -56,8 +56,8 @@ defineProps({
                                     <p class="text-sm text-gray-900 w-full py-2.5">{{ product.description }}</p>
                                 </div>
                                 <div class="col-span-6 sm:col-span-6 space-x-2">
-<!--                                    <Link :href="route('product.edit', product.id)" class="text-white bg-indigo-700 hover:bg-indigo-800 focus:ring-4 focus:outline-none focus:ring-indigo-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">Edit</Link>-->
-<!--                                    <Link :href="route('product.index')" class="text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-5 py-2.5">Cancel</Link>-->
+                                    <Link :href="route('products.edit', product.id)" class="text-white bg-indigo-700 hover:bg-indigo-800 focus:ring-4 focus:outline-none focus:ring-indigo-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">Edit</Link>
+                                    <Link :href="route('products.index')" class="text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-5 py-2.5">Cancel</Link>
                                 </div>
                             </div>
                         </div>
