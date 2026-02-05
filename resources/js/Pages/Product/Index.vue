@@ -62,7 +62,7 @@ defineProps({
                                     {{ product.category.name }}
                                 </td>
                                 <td class="px-6 py-4">
-                                    {{ product.price }}
+                                    {{ product.price_formatted }}
                                 </td>
                                 <td class="px-6 py-4">
                                     {{ product.weight }}
