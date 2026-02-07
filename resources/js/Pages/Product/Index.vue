@@ -46,6 +46,9 @@ const deleteRow = (id) => {
                             <thead class="text-xs text-gray-700 uppercase bg-gray-50 border-b">
                             <tr>
                                 <th scope="col" class="px-6 py-3">
+                                    #
+                                </th>
+                                <th scope="col" class="px-6 py-3">
                                     Product name
                                 </th>
                                 <th scope="col" class="px-6 py-3">
@@ -63,7 +66,10 @@ const deleteRow = (id) => {
                             </tr>
                             </thead>
                             <tbody>
-                            <tr v-for="product in products.data" :key="product.id" class="bg-white border-b hover:bg-gray-50">
+                            <tr v-for="(product, index) in products.data" :key="product.id" class="bg-white border-b hover:bg-gray-50">
+                                <td class="px-6 py-4">
+                                    {{ products.meta.from + index}}
+                                </td>
                                 <td scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
                                     {{ product.name }}
                                 </td>
