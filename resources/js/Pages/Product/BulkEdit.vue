@@ -3,7 +3,7 @@ import Modal from "@/Components/Modal.vue"
 import { useForm } from "@inertiajs/vue3"
 
 const form = useForm({
-    product_id: [],
+    product_ids: [],
     category_id: ''
 })
 
@@ -22,12 +22,24 @@ const props = defineProps({
     }
 })
 
-const emit = defineEmits(["close"])
+const update = () => {
+    form.product_ids = props.products.map((product) => product.id)
+
+    form.patch(route('products.bulk-update'), {
+        onSuccess: () => {
+            form.reset()
+            emit('close')
+            emit('updated')
+        }
+    })
+}
+
+const emit = defineEmits(["close", "updated"])
 </script>
 
 <template>
     <Modal :show="show" max-width="xl" @close="emit('close')">
-        <form class="relative bg-white rounded-lg shadow">
+        <form class="relative bg-white rounded-lg shadow" @submit.prevent="update">
             <!-- Modal header -->
             <div class="flex items-start justify-between p-4 border-b rounded-t">
                 <h3 class="text-xl font-semibold text-gray-900">
@@ -59,6 +71,7 @@ const emit = defineEmits(["close"])
                                 {{ product.name }}
                             </li>
                         </ul>
+                        <div class="font-sm text-red-500 mt-2" v-if="form.errors.product_ids">You need to choose one product or more to proceed</div>
                     </div>
                     <div class="col-span-6 sm:col-span-6">
                         <label for="category_id" class="block mb-2 text-sm font-medium text-gray-900 ">Category</label>
@@ -68,6 +81,8 @@ const emit = defineEmits(["close"])
                             <option value="">Select a category</option>
                             <option v-for="category in categories" :key="category.id" :value="category.id">{{ category.name }}</option>
                         </select>
+                        <div class="font-sm text-red-500 mt-2" v-if="form.errors.category_id">{{form.errors.category_id}}</div>
+
                     </div>
                 </div>
             </div>

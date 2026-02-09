@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\BulkUpdateProductRequest;
 use App\Http\Requests\StoreProductRequest;
 use App\Http\Requests\UpdateProductRequest;
 use App\Http\Resources\CategoryResource;
@@ -93,6 +94,16 @@ class ProductController extends Controller
         $product->update($request->validated());
 
         return redirect()->route('products.index')->with("message", "Product has been updated successfully.");
+    }
+
+    /**
+     * Update the specified resource in storage.
+     */
+    public function bulkUpdate(BulkUpdateProductRequest $request)
+    {
+        Product::whereIn('id', $request->product_ids)
+            ->update(['category_id' => $request->category_id]);
+        return redirect()->route('products.index')->with("message", "Selected products has been updated successfully.");
     }
 
     /**
