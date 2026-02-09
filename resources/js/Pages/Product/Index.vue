@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from "vue"
+import { ref, computed } from "vue"
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import { Head, Link, router } from '@inertiajs/vue3';
 import Pagination from "@/Components/Pagination.vue";
@@ -17,12 +17,22 @@ const props = defineProps({
         type: Object,
         required: true
     },
+    categories: {
+        type: Array,
+        required: true
+    },
     query:{
         type: Object,
         default: () => ({
             search: ''
         })
     }
+})
+
+const selectedProducts = computed(() => {
+    return props.products.data
+        .filter((product) => selectedIds.value.includes(product.id))
+        .map((product) => ({ id:product.id, name: product.name }))
 })
 
 const deleteRow = (id) => {
@@ -149,6 +159,6 @@ const deleteSelected = () => {
                 </div>
             </div>
         </div>
-        <BulkEdit :show="showModal" @close="showModal = false" />
+        <BulkEdit :show="showModal" @close="showModal = false" :products="selectedProducts" :categories="categories" />
     </AuthenticatedLayout>
 </template>
